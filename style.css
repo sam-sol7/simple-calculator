@@ -2,3 +2,26 @@
     height: 50px;
     width: 50px;
 }
+
+.calculator {
+    width: 215px;
+    padding: 0px;
+}
+
+.calculator-top {
+    height: 100%;
+    width: 100%;
+}
+
+.calculator-screen {
+    margin-right: 10px;
+}
+
+.calculator-rows {
+    padding: 0px;
+}
+
+#calculator-text { 
+    height: 20px;
+    text-align: right;
+}

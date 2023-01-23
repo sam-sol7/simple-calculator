@@ -1,4 +1,5 @@
 var buttons = document.getElementsByClassName("buttons");
+var calcText = document.getElementById("calculator-text")
 var equationArray = [];
 
 for (var i = 0; i < buttons.length; i++) {
@@ -7,33 +8,44 @@ for (var i = 0; i < buttons.length; i++) {
             console.log(getResult(equationArray));
             return;
         }
+        if (this.textContent == "AC") {
+            equationArray = [];
+            updateCalcScreen(equationArray);
+            return;
+        }
         let parsedChar = parseInt(this.textContent);
         if (!isNaN(parsedChar)) {
             if (equationArray[equationArray.length - 1] == '--') {
                 equationArray[equationArray.length - 1] = parsedChar * -1;
+                updateCalcScreen(equationArray);
                 return;
             }
             if (equationArray[equationArray.length - 1] === undefined || isNaN(parseInt(equationArray[equationArray.length - 1]))) {
                 equationArray[equationArray.length] = parsedChar;
+                updateCalcScreen(equationArray);
                 return;
             } 
             equationArray[equationArray.length - 1] = equationArray[equationArray.length - 1] * 10 + parseInt(this.textContent);
-
+            updateCalcScreen(equationArray);
         } else {
             if (!isNaN(equationArray[equationArray.length - 1])) {
                 equationArray[equationArray.length] = this.textContent;
+                updateCalcScreen(equationArray);
                 return;
             } 
             if (equationArray[equationArray.length - 1] == '--') {
+                updateCalcScreen(equationArray);
                 return;
             }
             if (this.textContent == '-' && isNaN(equationArray[equationArray.length - 1])) {
                 if (equationArray[equationArray.length - 1] == 'x' || equationArray[equationArray.length - 1] == '÷') {
                     equationArray[equationArray.length] = '--';
+                    updateCalcScreen(equationArray);
                     return;
                 }
             }
             equationArray[equationArray.length - 1] = this.textContent;
+            updateCalcScreen(equationArray);
         }
         console.log(equationArray);
     };
@@ -65,4 +77,8 @@ function getResult(equation) {
         } 
     }
     return total;
+}
+
+function updateCalcScreen(equationArray) {
+    calcText.innerHTML = equationArray.join(' ');
 }

@@ -72,6 +72,24 @@ function getResult(equation) {
             continue;
         }
     }
+    for (let i = 0; i < equation.length; i++) {
+        if (equationArray[i] == '+') {
+            let result = equationArray[i - 1] + equationArray[i + 1];
+            total = result;
+            equationArray[i - 1] = result; 
+            equationArray.splice(i, 2);
+            i--;
+            continue;
+        }
+        else if (equationArray[i] == '-'){
+            let result = equationArray[i - 1] - equationArray[i + 1];
+            total = result;
+            equationArray[i - 1] = result; 
+            equationArray.splice(i, 2);
+            i--;
+            continue;
+        }
+    }
     console.log(total);
     return total;
     // let total = 0;
